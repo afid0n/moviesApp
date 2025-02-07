@@ -12,3 +12,20 @@ export class Movie {
 
     }
 }
+export class MovieManager {
+    constructor(movies = []) {
+        this.movies = movies; 
+    }
+
+    setMovies(movies) {
+        this.movies = movies; 
+    }
+
+    searchMovies(query) {
+        return this.movies.filter(movie =>
+            movie.title.toLowerCase().includes(query.toLowerCase().trim())
+        );
+    }
+
+    sortMovies(){}
+}
