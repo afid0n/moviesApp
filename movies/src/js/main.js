@@ -33,8 +33,9 @@ document.addEventListener("DOMContentLoaded", ()=> {
         });
     })
     .catch(error=>console.error("fetch error", error));
+    console.log(fetchResult);
 
 })
 
-console.log(fetchResult);
+
 
