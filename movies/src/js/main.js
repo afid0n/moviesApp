@@ -1,12 +1,15 @@
 const API_URL = 'https://67a46e0e31d0d3a6b78652f0.mockapi.io/api/movies'
 const moviesContainer = document.querySelector('.row')
-
-const fetchResult = fetch(API_URL).then(res => res.json())
+ 
+document.addEventListener("DOMContentLoaded", ()=> {
+    const fetchResult = fetch(API_URL).then(res => res.json())
     .then((data) => {
         const moviesList = data
         console.log(moviesList);
-         moviesContainer.innerHTML+=''
+         moviesContainer.innerHTML = ''
         moviesList.forEach(movie => {
+            console.log("movie", movie);
+            
             const poster = movie.poster
             const title = movie.title;
             const genre = movie.genre;
@@ -30,6 +33,8 @@ const fetchResult = fetch(API_URL).then(res => res.json())
         });
     })
     .catch(error=>console.error("fetch error", error));
+
+})
 
 console.log(fetchResult);
 
