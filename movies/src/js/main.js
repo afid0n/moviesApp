@@ -1,11 +1,12 @@
+import { Movie } from "../js/class.js";
 const API_URL = 'https://67a46e0e31d0d3a6b78652f0.mockapi.io/api/movies'
 const moviesContainer = document.querySelector('.row')
- 
+
+ let moviesList =[];
 document.addEventListener("DOMContentLoaded", ()=> {
     const fetchResult = fetch(API_URL).then(res => res.json())
     .then((data) => {
         const moviesList = data
-        console.log(moviesList);
          moviesContainer.innerHTML = ''
         moviesList.forEach(movie => {
             console.log("movie", movie);
@@ -36,6 +37,15 @@ document.addEventListener("DOMContentLoaded", ()=> {
     console.log(fetchResult);
 
 })
+
+const searchInput = document.querySelector(".search-input");
+
+searchInput.addEventListener("keyup", function (e) {
+  const searchedMovies = app.searchMovie(e.target.value);
+  return searchedMovies
+});
+
+
 
 
 
