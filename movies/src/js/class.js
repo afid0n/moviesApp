@@ -1,3 +1,4 @@
+import { displayMovies } from "./helper.js";
 
 export class Movie {
     constructor(title, genre, poster, year, description, imdbRate, trailerURL, createdAt) {
@@ -14,11 +15,13 @@ export class Movie {
 }
 export class MovieManager {
     constructor(movies = []) {
-        this.movies = movies; 
+        this.movies = movies;
+        this.originalMovies = [];
     }
 
     setMovies(movies) {
-        this.movies = movies; 
+        this.movies = movies;
+        this.originalMovies = [...movies];
     }
 
     searchMovies(query) {
@@ -27,5 +30,22 @@ export class MovieManager {
         );
     }
 
-    sortMovies(){}
+    sortMovies(option) {
+        switch (option) {
+            case "new-to-old":
+                return [
+                    ...this.movies.sort((a, b) => {
+                        return b.year - a.year
+                    })
+                ]
+            case "old-to-new":
+                return [
+                    ...this.movies.sort((a, b) => {
+                        return a.year - b.year
+                    })
+                ]
+            default:
+                return [...this.originalMovies];                 
+        }
+    }
 }

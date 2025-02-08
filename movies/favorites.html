@@ -34,26 +34,30 @@
               <a class="nav-link" href="favorites.html">Favorites</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="add.htm">Add Movie</a>
+              <a class="nav-link" href="add.html">Add Movie</a>
             </li>
-          </ul> 
+          </ul>
           <div class="functions d-flex gap-1">
-          <div class="sort">
-            <select class="form-control" name="sort" id="movies-sort">
-              <option value="unordered" selected>Sort by year</option>
-              <option value="new-to-old">Newest to Oldest</option>
-              <option value="old-to-new">Oldest to Newest</option>
-          </select>
+            <div class="sort">
+              <select class="form-control" name="sort" id="movies-sort">
+                <option value="unordered" selected>Sort by year</option>
+                <option value="new-to-old">Newest to Oldest</option>
+                <option value="old-to-new">Oldest to Newest</option>
+              </select>
+            </div>
+            <form class="d-flex" role="search">
+              <input class="search-input form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
           </div>
-          <form class="d-flex" role="search">
-            <input class="search-input form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-        </div>
         </div>
       </div>
     </nav>
   </header>
+  <!-- bootstap script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
   <!-- sweet alert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script type="module" src="src/js/main.js"></script>
