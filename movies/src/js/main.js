@@ -31,8 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (result.isConfirmed) {
         const id = btn.target.getAttribute("data-id");
-
-
         let movieCard = btn.target.parentElement.parentElement.parentElement.parentElement;
 
         fetch(`${API_URL}/${id}`, {

@@ -12,13 +12,13 @@ export function displayMovies(movies) {
           <div class="card h-100" style="width: 18rem; margin-top:20px;">
             <img src="${poster}" class="card-img-top" alt="${title}">
             <div class="card-body">
-              <a href="details.html" class="card-title fs-4"><i class="fa-solid fa-circle-info"></i> ${title}</a>
+              <a href="details.html?id=${id}" class="card-title fs-4"><i class="fa-solid fa-circle-info"></i> ${title}</a>
               <p class="card-genre">${genre}</p>
               <span class="card-imdb"><i class="fa-solid fa-star"></i> IMDb ${imdbRate}/10</span>
               <div class="buttons mt-3 d-flex gap-1">
                 <button class="btn btn-secondary"><i class="fa-solid fa-heart"></i></button>
                 <button class="btn btn-danger delete" data-id=${id}><i class="fa-solid fa-trash delete"></i></button>
-                <a href="edit.html" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a href="edit.html?id=${id}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
               </div>
             </div>
           </div>

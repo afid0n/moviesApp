@@ -1,5 +1,3 @@
-import { displayMovies } from "./helper.js";
-
 export class Movie {
     constructor(title, genre, poster, year, description, imdbRate, trailerURL, createdAt) {
         this.title = title;
