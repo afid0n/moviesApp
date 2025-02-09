@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-.heart.favorite{
+.heart.favorited {
     background-color: white;
     color: rgb(255, 39, 90);
 }

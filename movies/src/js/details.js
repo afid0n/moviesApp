@@ -22,9 +22,7 @@ document.addEventListener("DOMContentLoaded",()=>{
             description.textContent=movie.description;
             imdbRate.textContent=movie.imdbRate;
             trailerURL.innerHTML = `<iframe width="560" height="315" src="${movie.trailerURL}"  allowfullscreen></iframe>`;
-           createdAt.textContent= moment(movie.createdAt).format(
-            "DD/MM/YYYY"
-           )
+           createdAt.textContent= moment(movie.createdAt).format('LL');
         }
     })
 })

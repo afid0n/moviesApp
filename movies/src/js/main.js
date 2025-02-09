@@ -68,27 +68,36 @@ sortSelect.addEventListener('change', (y) => {
   displayMovies(sortedMovies);
 });
 
+function getFavorites() {
+    return JSON.parse(localStorage.getItem("favorites")) || [];
+}
 
 moviesContainer.addEventListener("click", (e) => {
-    if (e.target.classList.contains("heart-icon")) {
+    if (e.target.closest(".heart")) {
         const movieCard = e.target.closest(".movie-card");
-        const movieId = movieCard.getAttribute("data-id");
+        const heartButton = e.target.closest(".heart");
+        const movieId = heartButton.getAttribute("data-id");
 
-        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+        let favorites = getFavorites();
+        const isFavorite = favorites.some(movie => movie.id === movieId);
 
-        if (favorites.some(movie => movie.id === movieId)) {
-            // Remove from favorites
+        if (isFavorite) {
             favorites = favorites.filter(movie => movie.id !== movieId);
-            e.target.classList.remove("favorite"); // Remove filled heart
+            heartButton.classList.remove("favorited");
         } else {
-            // Add to favorites
+            const titleElement = movieCard.querySelector(".card-title");
+            const posterElement = movieCard.querySelector("img");
+
+            if (!titleElement || !posterElement) return; 
+
             const movieData = {
                 id: movieId,
-                title: movieCard.querySelector(".movie-title").textContent,
-                poster: movieCard.querySelector(".movie-poster").src
+                title: titleElement.textContent.trim(),
+                poster: posterElement.src
             };
+
             favorites.push(movieData);
-            e.target.classList.add("favorited"); // Show filled heart
+            heartButton.classList.add("favorited");
         }
 
         localStorage.setItem("favorites", JSON.stringify(favorites));
