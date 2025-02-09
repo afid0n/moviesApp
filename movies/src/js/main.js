@@ -67,3 +67,31 @@ sortSelect.addEventListener('change', (y) => {
   const sortedMovies = moviesList.sortMovies(y.target.value);
   displayMovies(sortedMovies);
 });
+
+
+moviesContainer.addEventListener("click", (e) => {
+    if (e.target.classList.contains("heart-icon")) {
+        const movieCard = e.target.closest(".movie-card");
+        const movieId = movieCard.getAttribute("data-id");
+
+        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+        if (favorites.some(movie => movie.id === movieId)) {
+            // Remove from favorites
+            favorites = favorites.filter(movie => movie.id !== movieId);
+            e.target.classList.remove("favorite"); // Remove filled heart
+        } else {
+            // Add to favorites
+            const movieData = {
+                id: movieId,
+                title: movieCard.querySelector(".movie-title").textContent,
+                poster: movieCard.querySelector(".movie-poster").src
+            };
+            favorites.push(movieData);
+            e.target.classList.add("favorited"); // Show filled heart
+        }
+
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+    }
+});
+

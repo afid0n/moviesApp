@@ -16,7 +16,7 @@ export function displayMovies(movies) {
               <p class="card-genre">${genre}</p>
               <span class="card-imdb"><i class="fa-solid fa-star"></i> IMDb ${imdbRate}/10</span>
               <div class="buttons mt-3 d-flex gap-1">
-                <button class="btn btn-secondary"><i class="fa-solid fa-heart"></i></button>
+                <button class="btn btn-secondary heart "><i class="fa-solid fa-heart heart"></i></button>
                 <button class="btn btn-danger delete" data-id=${id}><i class="fa-solid fa-trash delete"></i></button>
                 <a href="edit.html?id=${id}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
               </div>
