@@ -1,12 +1,13 @@
 import { Movie, MovieManager } from "../js/class.js";
 import { displayMovies } from "../js/helper.js";
-const API_URL = 'https://67a46e0e31d0d3a6b78652f0.mockapi.io/api/movies'
+
+const API_URL = 'https://67a46e0e31d0d3a6b78652f0.mockapi.io/api/movies';
 const searchInput = document.querySelector(".search-input");
-const sortSelect = document.querySelector("#movies-sort")
-const moviesContainer = document.querySelector('.row')
+const sortSelect = document.querySelector("#movies-sort");
+const moviesContainer = document.querySelector('.row');
 
+const moviesList = new MovieManager();
 
-const moviesList = new MovieManager()
 document.addEventListener("DOMContentLoaded", () => {
   fetch(API_URL)
     .then(res => res.json())
@@ -14,47 +15,46 @@ document.addEventListener("DOMContentLoaded", () => {
       moviesList.setMovies(data);
       displayMovies(moviesList.movies);
     })
-    .catch(error => console.error("fetch error", error));
+    .catch(error => console.error("Fetch error", error));
 
-  moviesContainer.addEventListener("click",(btn) => {
+  moviesContainer.addEventListener("click", async (btn) => {
     if (btn.target.classList.contains("delete")) {
-      const result = Swal.fire({
+      const result = await Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to recover this movie!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#d33",
         cancelButtonColor: "#3085d6",
-        confirmButtonText: "Yes, delete it!",
+        confirmButtonText: "Yes, delete it!"
       });
-
 
       if (result.isConfirmed) {
         const id = btn.target.getAttribute("data-id");
+
         let movieCard = btn.target.parentElement.parentElement.parentElement.parentElement;
 
-        fetch(`${API_URL}/${id}`, {
-          method: "DELETE",
-        })
-          .then((res) => {
-            if (!res.ok) {
-              throw new Error("Failed to delete movie");
-            }
-            return res.json();
-          })
-          .then(() => {
-            Swal.fire("Deleted!", "Your movie has been deleted.", "success");
-            if (movieCard) {
-              movieCard.remove();
-            }
-          })
-          .catch((err) => {
-            Swal.fire("Error!", "Failed to delete movie.", "error");
-            console.error(err);
+        try {
+          const response = await fetch(`${API_URL}/${id}`, {
+            method: "DELETE",
           });
+
+          if (!response.ok) {
+            throw new Error("Failed to delete movie");
+          }
+
+          Swal.fire("Deleted!", "Your movie has been deleted.", "success");
+
+          if (movieCard) {
+            movieCard.remove();
+          }
+        } catch (error) {
+          Swal.fire("Error!", "Failed to delete movie.", "error");
+          console.error(error);
+        }
       }
     }
-  })
+  });
 });
 
 searchInput.addEventListener("keyup", (e) => {
@@ -63,14 +63,7 @@ searchInput.addEventListener("keyup", (e) => {
 });
 
 sortSelect.addEventListener('change', (y) => {
-  searchInput.value = ''
+  searchInput.value = '';
   const sortedMovies = moviesList.sortMovies(y.target.value);
   displayMovies(sortedMovies);
-})
-
-
-
-
-
-
-
+});
